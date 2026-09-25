@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCAMSHIELD 360 | AI-Assisted Multi-Channel Scam & Phishing Detection System</title>
+  <meta name="description" content="Explainable, rule-based cybersecurity platform detecting suspicious URLs, QR codes, and scam messages.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <div class="brand-logo-icon">🛡️</div>
+        <div class="brand-details">
+          <h1>SCAMSHIELD 360</h1>
+          <div class="brand-tagline">Detect. Explain. Protect.</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="dashboard">
+          <span>📊</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-tab="url-scanner">
+          <span>🌐</span>
+          <span>URL Scanner</span>
+        </button>
+        <button class="nav-btn" data-tab="qr-scanner">
+          <span>📷</span>
+          <span>QR Scanner</span>
+        </button>
+        <button class="nav-btn" data-tab="message-scanner">
+          <span>💬</span>
+          <span>Message Scanner</span>
+        </button>
+        <button class="nav-btn" data-tab="history">
+          <span>🕒</span>
+          <span>Scan History</span>
+        </button>
+        <button class="nav-btn" data-tab="awareness">
+          <span>🧠</span>
+          <span>Cyber Awareness</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="engine-status-badge">
+          <div class="pulse-dot"></div>
+          <div>
+            <div style="font-weight: 700; color: #f1f5f9;">Engine Online</div>
+            <div style="font-size: 0.7rem; color: #94a3b8;">Deterministic Heuristics</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <main class="main-content">
+
+      <!-- ============================================================
+           SECTION 1: DASHBOARD
+           ============================================================ -->
+      <section id="section-dashboard" class="page-section active">
+        <div class="section-header">
+          <h2 class="section-title">Security Operations Dashboard</h2>
+          <p class="section-subtitle">Real-time threat monitoring and heuristic telemetry across all protected channels.</p>
+        </div>
+
+        <!-- 4 Key Stat Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon cyan">🔍</div>
+            <div class="stat-content">
+              <span class="stat-label">Total Scans Run</span>
+              <span class="stat-value" id="stat-total-scans">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red">🚨</div>
+            <div class="stat-content">
+              <span class="stat-label">Threats Detected</span>
+              <span class="stat-value" id="stat-threats-detected">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <div class="stat-content">
+              <span class="stat-label">Safe Results</span>
+              <span class="stat-value" id="stat-safe-results">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon purple">📈</div>
+            <div class="stat-content">
+              <span class="stat-label">Average Risk Score</span>
+              <span class="stat-value" id="stat-avg-score">0/100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threat Distribution + Quick Launch -->
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-title">
+              <span>Threat Severity Distribution</span>
+              <span class="channel-pill">HEURISTIC SPECTRUM</span>
+            </div>
+            <div class="distribution-bars">
+              <div class="dist-bar-item">
+                <div class="dist-header">
+                  <span style="color: var(--safe-green);">Low Risk / Safe (0–30)</span>
+                  <span id="dist-count-safe">0 scans</span>
+                </div>
+                <div class="dist-progress-bg">
+                  <div class="dist-fill safe" id="dist-bar-safe" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="dist-bar-item">
+                <div class="dist-header">
+                  <span style="color: var(--warn-amber);">Medium Risk / Suspicious (31–60)</span>
+                  <span id="dist-count-medium">0 scans</span>
+                </div>
+                <div class="dist-progress-bg">
+                  <div class="dist-fill medium" id="dist-bar-medium" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="dist-bar-item">
+                <div class="dist-header">
+                  <span style="color: var(--danger-orange);">High Risk / Likely Phishing (61–80)</span>
+                  <span id="dist-count-high">0 scans</span>
+                </div>
+                <div class="dist-progress-bg">
+                  <div class="dist-fill high" id="dist-bar-high" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="dist-bar-item">
+                <div class="dist-header">
+                  <span style="color: var(--critical-red);">Critical Threat / Confirmed Phishing (81–100)</span>
+                  <span id="dist-count-critical">0 scans</span>
+                </div>
+                <div class="dist-progress-bg">
+                  <div class="dist-fill critical" id="dist-bar-critical" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>Quick Scanner Access</span>
+              <span class="badge safe">OPERATIONAL</span>
+            </div>
+            <div class="quick-launch-grid">
+              <div class="quick-launch-card" data-tab="url-scanner">
+                <div class="quick-icon">🌐</div>
+                <div class="quick-title">URL Scanner</div>
+                <div class="quick-desc">Inspect domain age, TLD reputation, subdomains & spoofing patterns.</div>
+              </div>
+
+              <div class="quick-launch-card" data-tab="qr-scanner">
+                <div class="quick-icon">📷</div>
+                <div class="quick-title">QR Scanner</div>
+                <div class="quick-desc">Decode image files or live camera video stream into URL engine.</div>
+              </div>
+
+              <div class="quick-launch-card" data-tab="message-scanner">
+                <div class="quick-icon">💬</div>
+                <div class="quick-title">Message Scanner</div>
+                <div class="quick-desc">Identify urgency coercion, OTP demands & financial lures in text.</div>
+              </div>
+
+              <div class="quick-launch-card" data-tab="awareness">
+                <div class="quick-icon">🧠</div>
+                <div class="quick-title">Cyber Awareness</div>
+                <div class="quick-desc">Benchmark human firewall defense against modern social engineering.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Scans Table -->
+        <div class="card">
+          <div class="card-title">
+            <span>Recent Threat Telemetry</span>
+            <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="App.switchTab('history')">View Full History</button>
+          </div>
+          <div class="table-responsive">
+            <table class="scam-table">
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>Target / Content</th>
+                  <th>Risk Score</th>
+                  <th>Classification</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="recent-scans-tbody">
+                <!-- Dynamically populated from history -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 2: URL SCANNER
+           ============================================================ -->
+      <section id="section-url-scanner" class="page-section">
+        <div class="section-header">
+          <h2 class="section-title">🌐 Heuristic URL Scanner</h2>
+          <p class="section-subtitle">Deep forensic inspection of web links using explainable deterministic security heuristics.</p>
+        </div>
+
+        <div class="scanner-box">
+          <div class="input-group">
+            <input type="text" id="url-input" class="scam-input" placeholder="Enter or paste URL to analyze (e.g. https://example.com/login)..." autocomplete="off">
+            <button id="analyze-url-btn" class="btn-primary">
+              <span>⚡ Analyze URL</span>
+            </button>
+          </div>
+
+          <div id="url-error-msg" style="display: none; color: #f87171; font-size: 0.88rem; margin-top: 10px; font-weight: 600;"></div>
+        </div>
+
+        <!-- Result Breakdown Card -->
+        <div id="url-result-card" class="scan-result-card">
+          <div class="result-header">
+            <div class="score-display-box">
+              <div class="score-circle-wrapper">
+                <svg class="score-gauge-svg" viewBox="0 0 100 100">
+                  <circle class="score-gauge-bg" cx="50" cy="50" r="45"></circle>
+                  <circle id="url-gauge-fill" class="score-gauge-fill" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="score-number-inside">
+                  <span id="url-score-number">0</span>
+                  <span class="score-denom">/100</span>
+                </div>
+              </div>
+
+              <div class="result-verdict">
+                <div id="url-risk-level" class="badge">EVALUATING</div>
+                <div id="url-verdict-class" class="verdict-classification">SAFE</div>
+                <div id="url-target-display" class="verdict-target-text"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why This Was Detected -->
+          <div class="explain-section">
+            <h3 class="explain-heading">
+              <span>🔍</span>
+              <span>WHY THIS WAS DETECTED (EXPLAINABLE HEURISTICS)</span>
+            </h3>
+            <div id="url-indicators-list" class="indicators-list">
+              <!-- Indicators dynamically rendered here -->
+            </div>
+          </div>
+
+          <!-- Recommended Action -->
+          <div id="url-recommendation-box" class="recommendation-box">
+            <div class="rec-icon">🛡️</div>
+            <div>
+              <div class="rec-title">RECOMMENDED ACTION</div>
+              <div id="url-recommendation-text" class="rec-text"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 3: QR SCANNER
+           ============================================================ -->
+      <section id="section-qr-scanner" class="page-section">
+        <div class="section-header">
+          <h2 class="section-title">📷 QR Code Threat Scanner</h2>
+          <p class="section-subtitle">Decode physical or digital QR codes and pipe extracted destinations into the URL Threat Engine.</p>
+        </div>
+
+        <div class="qr-modes-container">
+          <!-- Upload Box -->
+          <div class="qr-upload-zone" id="qr-upload-zone">
+            <input type="file" id="qr-file-input" accept="image/*" style="display: none;">
+            <div id="qr-upload-prompt" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <span style="font-size: 2.5rem;">📁</span>
+              <div style="font-weight: 700; font-size: 1.05rem;">Click to Upload or Drag QR Image</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Supports PNG, JPG, WebP formats</div>
+            </div>
+            <div id="qr-preview-area" class="qr-preview-area">
+              <img id="qr-preview-img" class="qr-preview-img" alt="QR Preview">
+              <span class="badge safe">Image Loaded</span>
+            </div>
+          </div>
+
+          <!-- Live Camera Card -->
+          <div class="qr-camera-card">
+            <span style="font-size: 2.2rem;">📹</span>
+            <div style="font-weight: 700; font-size: 1.05rem;">Live Camera Scanner</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted); text-align: center;">Scan physical QR stickers or badges via device camera.</div>
+            
+            <div id="qr-video-container" class="video-container">
+              <video id="qr-video" class="scanner-video"></video>
+              <div class="scan-laser"></div>
+            </div>
+
+            <button id="start-camera-btn" class="btn-primary" style="margin-top: 6px;">
+              <span>📹 Start Camera</span>
+            </button>
+            <button id="stop-camera-btn" class="btn-danger" style="display: none; margin-top: 6px;">
+              <span>⏹ Stop Camera</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="qr-error-msg" style="display: none; color: #f87171; font-size: 0.88rem; margin-bottom: 16px; font-weight: 600;"></div>
+
+        <!-- Result Breakdown Card -->
+        <div id="qr-result-card" class="scan-result-card">
+          <div class="result-header">
+            <div class="score-display-box">
+              <div class="score-circle-wrapper">
+                <svg class="score-gauge-svg" viewBox="0 0 100 100">
+                  <circle class="score-gauge-bg" cx="50" cy="50" r="45"></circle>
+                  <circle id="qr-gauge-fill" class="score-gauge-fill" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="score-number-inside">
+                  <span id="qr-score-number">0</span>
+                  <span class="score-denom">/100</span>
+                </div>
+              </div>
+
+              <div class="result-verdict">
+                <div id="qr-risk-level" class="badge">EVALUATING</div>
+                <div id="qr-verdict-class" class="verdict-classification">SAFE</div>
+                <div id="qr-target-display" class="verdict-target-text"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="explain-section">
+            <h3 class="explain-heading">
+              <span>🔍</span>
+              <span>WHY THIS WAS DETECTED (EXPLAINABLE PIPELINE)</span>
+            </h3>
+            <div id="qr-indicators-list" class="indicators-list"></div>
+          </div>
+
+          <div id="qr-recommendation-box" class="recommendation-box">
+            <div class="rec-icon">🛡️</div>
+            <div>
+              <div class="rec-title">RECOMMENDED ACTION</div>
+              <div id="qr-recommendation-text" class="rec-text"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 4: MESSAGE SCANNER
+           ============================================================ -->
+      <section id="section-message-scanner" class="page-section">
+        <div class="section-header">
+          <h2 class="section-title">💬 Message & SMS Threat Analyzer</h2>
+          <p class="section-subtitle">Local NLP rule engine detecting urgency coercion, fake lottery lures, and OTP theft attempts.</p>
+        </div>
+
+        <div class="scanner-box">
+          <textarea id="message-input" class="scam-input scam-textarea" placeholder="Paste suspicious SMS, WhatsApp message, email or communication here..."></textarea>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0 16px 0;">
+            <span id="msg-char-count" style="font-size: 0.78rem; color: var(--text-dim);">0 characters | 0 words</span>
+            <button id="clear-msg-btn" class="btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">Clear Text</button>
+          </div>
+
+          <button id="analyze-msg-btn" class="btn-primary" style="width: 100%; justify-content: center;">
+            <span>⚡ Analyze Message Heuristics</span>
+          </button>
+
+          <div id="msg-error-msg" style="display: none; color: #f87171; font-size: 0.88rem; margin-top: 12px; font-weight: 600;"></div>
+        </div>
+
+        <!-- Result Breakdown Card -->
+        <div id="msg-result-card" class="scan-result-card">
+          <div class="result-header">
+            <div class="score-display-box">
+              <div class="score-circle-wrapper">
+                <svg class="score-gauge-svg" viewBox="0 0 100 100">
+                  <circle class="score-gauge-bg" cx="50" cy="50" r="45"></circle>
+                  <circle id="msg-gauge-fill" class="score-gauge-fill" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="score-number-inside">
+                  <span id="msg-score-number">0</span>
+                  <span class="score-denom">/100</span>
+                </div>
+              </div>
+
+              <div class="result-verdict">
+                <div id="msg-risk-level" class="badge">EVALUATING</div>
+                <div id="msg-verdict-class" class="verdict-classification">SAFE</div>
+                <div id="msg-target-display" class="verdict-target-text"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="explain-section">
+            <h3 class="explain-heading">
+              <span>🔍</span>
+              <span>WHY THIS WAS DETECTED (EXPLAINABLE NLP PATTERNS)</span>
+            </h3>
+            <div id="msg-indicators-list" class="indicators-list"></div>
+          </div>
+
+          <div id="msg-recommendation-box" class="recommendation-box">
+            <div class="rec-icon">🛡️</div>
+            <div>
+              <div class="rec-title">RECOMMENDED ACTION</div>
+              <div id="msg-recommendation-text" class="rec-text"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 5: SCAN HISTORY
+           ============================================================ -->
+      <section id="section-history" class="page-section">
+        <div class="section-header">
+          <h2 class="section-title">🕒 Scan History & Audit Log</h2>
+          <p class="section-subtitle">Local persistent storage tracking forensic records across all scanning channels.</p>
+        </div>
+
+        <div class="card">
+          <div class="history-toolbar">
+            <div style="flex: 1; min-width: 240px;">
+              <input type="text" id="history-search-input" class="scam-input" placeholder="Search history by URL, message keywords or threat level..." style="padding: 10px 14px; font-size: 0.9rem;">
+            </div>
+
+            <div class="history-filters">
+              <select id="history-type-filter" class="select-filter">
+                <option value="all">All Channels</option>
+                <option value="url">URLs</option>
+                <option value="qr">QR Codes</option>
+                <option value="message">Messages</option>
+              </select>
+
+              <select id="history-risk-filter" class="select-filter">
+                <option value="all">All Risk Levels</option>
+                <option value="safe">Safe (0-30)</option>
+                <option value="suspicious">Suspicious (31-60)</option>
+                <option value="phishing">Phishing/Scam (>60)</option>
+              </select>
+
+              <button id="export-history-btn" class="btn-secondary" title="Export records as JSON">
+                <span>📥 Export JSON</span>
+              </button>
+
+              <button id="clear-history-btn" class="btn-danger" title="Clear all stored logs">
+                <span>🗑 Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.8rem; color: var(--text-muted);">
+            <span id="history-total-count">0 records</span>
+            <span>Storage: HTML5 LocalStorage</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="scam-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Channel</th>
+                  <th>Target / Content</th>
+                  <th>Risk Score</th>
+                  <th>Classification</th>
+                  <th>Action Advice</th>
+                </tr>
+              </thead>
+              <tbody id="history-scans-tbody">
+                <!-- Dynamically populated from history -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 6: CYBER AWARENESS MODULE
+           ============================================================ -->
+      <section id="section-awareness" class="page-section">
+        <div class="section-header">
+          <h2 class="section-title">🧠 Cyber Awareness: "Can You Detect the Scam?"</h2>
+          <p class="section-subtitle">Interactive scam discernment scenarios testing human vulnerability against engineering techniques.</p>
+        </div>
+
+        <div class="awareness-container">
+          <!-- Quiz Header Card -->
+          <div class="quiz-header-card">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Human Firewall Benchmark</h3>
+              <p id="awareness-summary-text" style="color: var(--text-muted); font-size: 0.9rem;">
+                Answer the 5 scenarios below to test your social engineering defense score.
+              </p>
+            </div>
+
+            <div class="awareness-score-badge">
+              <div class="score-pie" id="awareness-score-val">0%</div>
+              <div>
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Awareness Score</div>
+                <div id="awareness-rank-badge" class="badge warning">In Progress</div>
+              </div>
+              <button id="reset-quiz-btn" class="btn-secondary" style="margin-left: 12px; padding: 6px 12px; font-size: 0.8rem;">
+                ↻ Reset Quiz
+              </button>
+            </div>
+          </div>
+
+          <!-- 5 Scenarios Container -->
+          <div id="awareness-scenarios-container">
+            <!-- Dynamically populated by awareness.js -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JavaScript Modules in Strict Dependency Order -->
+  <script src="js/vendor/jsQR.js"></script>
+  <script src="js/threat-engine.js"></script>
+  <script src="js/url-scanner.js"></script>
+  <script src="js/message-scanner.js"></script>
+  <script src="js/qr-scanner.js"></script>
+  <script src="js/awareness.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

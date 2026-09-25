@@ -1,0 +1,27 @@
+{
+  "name": "scamshield360",
+  "version": "1.0.0",
+  "description": "AI-Assisted Multi-Channel Scam & Phishing Detection System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "phishing-detection",
+    "scam-detection",
+    "explainable-ai",
+    "qr-scanner",
+    "url-scanner",
+    "message-scanner"
+  ],
+  "author": "SCAMSHIELD 360 Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4"
+  }
+}

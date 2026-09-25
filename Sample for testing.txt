@@ -1,0 +1,10 @@
+URL Scanner
+https://www.google.com  - Safe
+https://secure-login.example.com  - Suspicious
+https://paypal-login-security.verify-account.example - Critical
+
+Message Scanner
+Congratulations! You have won ₹50,000. Click immediately to claim your reward. - Critical
+Your bank account will be blocked today. Verify your account immediately using the link below. - Critical
+Dear user, earn ₹5,000 daily with part time Telegram work from home. Complete simple review tasks and receive instant cashback. Deposit ₹500 refundable security fee to start. - Suspicious
+Hi Alex, please confirm if the team sync tomorrow at 10 AM works for you. The agenda is uploaded to our shared drive. - Safe
