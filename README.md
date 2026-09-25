@@ -1,7 +1,6 @@
 # SCAMSHIELD 360
 ### *Detect. Explain. Protect.*
 **AI-Assisted Multi-Channel Scam & Phishing Detection System**
-*College National Level Project Expo Edition*
 
 ---
 
